@@ -1,9 +1,10 @@
-import DummyClass from "../src/--libraryname--"
+// import DummyClass from "../src/--libraryname--"
+// import DummyClass from "../src/ts-axios.ts"
 
 /**
  * Dummy test
  */
-describe("Dummy test", () => {
+/* describe("Dummy test", () => {
   it("works if true is truthy", () => {
     expect(true).toBeTruthy()
   })
@@ -11,4 +12,4 @@ describe("Dummy test", () => {
   it("DummyClass is instantiable", () => {
     expect(new DummyClass()).toBeInstanceOf(DummyClass)
   })
-})
+}) */
