@@ -1,5 +1,4 @@
 # ts-axios
 使用 TypeScript 重构 axios 
 不包括在NodeJs中的实现部分
-
-# /examples 目录
+## 集成 demo 构建
