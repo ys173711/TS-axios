@@ -1,4 +1,6 @@
-import { isDate, isObject } from './utils'
+// 处理get请求，把params拼在url?后面
+
+import { isDate, isObject, isPlainObject } from './utils'
 
 function encode(val: string): string {
   return encodeURIComponent(val) // 允许特殊字符出现在url，不希望被encode
@@ -33,8 +35,8 @@ export function buildURL(url: string, params?: any): string {
 
     values.forEach(val => {
       if (isDate(val)) {
-        val = val.toISOString
-      } else if (isObject(val)) {
+        val = val.toISOString()
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)

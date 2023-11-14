@@ -5,6 +5,9 @@ export function isDate(params: any): params is Date {
 }
 
 export function isObject(params: any): params is Object {
-  // return toString.call(params) === '[object Object]'
   return params !== null && typeof params === 'object'
+}
+
+export function isPlainObject(params: any): params is Object {
+  return toString.call(params) === '[object Object]'
 }
