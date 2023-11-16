@@ -11,3 +11,12 @@ export function isObject(params: any): params is Object {
 export function isPlainObject(params: any): params is Object {
   return toString.call(params) === '[object Object]'
 }
+
+// 把from拷贝到to中
+export function extend<T, U>(to: T, from: U): T & U {
+  for (const key in from) {
+    ;(to as T & U)[key] = from[key] as any
+  }
+
+  return to as T & U
+}
