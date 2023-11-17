@@ -30,7 +30,7 @@ registerSimpleRouter()
 registerBaseRouter()
 registerErrorRouter()
 registerExtendRouter()
-// registerInterceptorRouter()
+registerInterceptorRouter()
 // registerConfigRouter()
 
 app.use(router)
