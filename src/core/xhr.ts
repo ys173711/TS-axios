@@ -2,6 +2,7 @@ import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import { parseHeaders } from '../helpers/headers'
 import { transformResponse } from '../helpers/data'
 import { createError } from '../helpers/error'
+import transform from './transform'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -9,7 +10,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       data = null,
       url,
       method = 'get',
-      headers,
+      headers = {},
       responseType,
       timeout
     } = config
@@ -37,7 +38,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       const responseData =
         responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
-        data: transformResponse(responseData),
+        data: responseData,
         status: request.status,
         statusText: request.statusText,
         headers: responseHeaders,

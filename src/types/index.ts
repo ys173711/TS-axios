@@ -1,7 +1,7 @@
 // 公共类型定义文件
 import { Interceptors } from '../core/Axios'
 
-type Method =
+export type Method =
   | 'get'
   | 'GET'
   | 'delete'
@@ -26,6 +26,11 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number // 允许配置超时时间
+
+  transformRequest?: AxiosConfigTransform | AxiosConfigTransform[]
+  transformResponse?: AxiosConfigTransform | AxiosConfigTransform[]
+
+  [propName: string]: any
 }
 
 // 响应对象
@@ -51,11 +56,11 @@ export interface AxiosError extends Error {
 
 // 扩展axios方法
 export interface Axios {
-  // interceptors: Interceptors
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
   }
+  defaults: AxiosRequestConfig
 
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
@@ -87,6 +92,10 @@ export interface AxiosInstance extends Axios {
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance
+}
+
 // 定义拦截器管理类对外的接口
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
@@ -100,4 +109,9 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+//
+export interface AxiosConfigTransform {
+  (data: any, headers?: any): any
 }

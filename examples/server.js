@@ -31,7 +31,7 @@ registerBaseRouter()
 registerErrorRouter()
 registerExtendRouter()
 registerInterceptorRouter()
-// registerConfigRouter()
+registerConfigRouter()
 
 app.use(router)
 
