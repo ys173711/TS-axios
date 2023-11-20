@@ -33,6 +33,8 @@ export interface AxiosRequestConfig {
   cancelToken?: CancelToken
 
   withCredentials?: boolean
+  xsrfCookieName?: string
+  xsrfHeaderName?: string
 
   [propName: string]: any
 }
