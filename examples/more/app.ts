@@ -1,7 +1,7 @@
-import { error } from 'console'
 import axios from '../../src/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { AxiosError } from '../../src/helpers/error'
 
 /* document.cookie = 'a=b'
 
@@ -82,3 +82,38 @@ uploadEL?.addEventListener('click', function(e) {
 })
 
 /* ---------------------------------- */
+
+// http Authorization
+/* axios.post('/more/post', {
+  a: 1
+}, {
+  auth: {
+    username: 'Yee',
+    password: '123456'
+  }
+}).then(res => {
+  console.log(res)
+}) */
+
+/* ---------------------------------- */
+
+// 自定义合法状态码功能
+axios.get('/more/304', {
+  // validateStatus(status) {
+  //   return status >=200 && status < 400
+  // }
+}).then(res => {
+  console.log(res)
+}).catch((err:AxiosError) => {
+  console.log(err.message)
+})
+
+axios.get('/more/304', {
+  validateStatus(status) {
+    return status >=200 && status < 400
+  }
+}).then(res => {
+  console.log(res)
+}).catch((err:AxiosError) => {
+  console.log(err.message)
+})

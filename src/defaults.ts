@@ -27,7 +27,12 @@ const defaults: AxiosRequestConfig = {
     function(data: any) {
       return transformResponse(data)
     }
-  ]
+  ],
+
+  // 合法状态码默认配置
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 
 const methodsNoData = ['get', 'options', 'delete', 'head']
