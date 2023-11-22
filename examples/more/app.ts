@@ -1,7 +1,8 @@
-import axios from '../../src/index'
+import axios, { AxiosRequestConfig } from '../../src/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { AxiosError } from '../../src/helpers/error'
+import qs from 'qs'
 
 /* document.cookie = 'a=b'
 
@@ -98,7 +99,7 @@ uploadEL?.addEventListener('click', function(e) {
 /* ---------------------------------- */
 
 // 自定义合法状态码功能
-axios.get('/more/304', {
+/* axios.get('/more/304', {
   // validateStatus(status) {
   //   return status >=200 && status < 400
   // }
@@ -116,4 +117,82 @@ axios.get('/more/304', {
   console.log(res)
 }).catch((err:AxiosError) => {
   console.log(err.message)
+}) */
+
+/* ---------------------------------- */
+
+// 自定义url参数序列化规则功能
+/* axios.get('/more/get', {
+  params: new URLSearchParams('a=b&c=d')
+}).then(res => {
+  console.log(res)
 })
+
+axios.get('/more/get', {
+  params: {
+    a: 1,
+    b: 2,
+    c: ['a', 'b', 'c']
+  }
+}).then(res => {
+  console.log(res)
+})
+
+const instance2 = axios.create({
+  paramsSerializer(params) {
+    return qs.stringify(params, {arrayFormat: 'brackets'})
+  }
+})
+instance2.get('/more/get', {
+  params: {
+    a: 1,
+    b: 2,
+    c: ['a', 'b', 'c']
+  }
+}).then(res => {
+  console.log(res)
+}) */
+
+// baseURL
+/* const instance3 = axios.create({
+  baseURL: 'https://img1.sycdn.imooc.com/'
+})
+
+instance3.get('/655db1a3000181d716000682.jpg')
+
+instance3.get('https://img1.sycdn.imooc.com/655587f9000116e716000682.jpg') */
+
+/* ---------------------------------- */
+
+// 
+function getA() {
+  return axios.get('/more/A')
+}
+
+function getB() {
+  return axios.get('/more/B')
+}
+
+axios.all([getA(), getB()])
+  .then(axios.spread(function(resA, resB) {
+    console.log(resA.data)
+    console.log(resB.data)
+}))
+
+axios.all([getA(), getB()])
+  .then(([resA, resB]) => {
+    console.log(resA.data)
+    console.log(resB.data)
+})
+
+/* const fakeConfig: AxiosRequestConfig = {
+  baseURL: 'https://www.baidu.com/',
+  url: '/user/12345',
+  params: {
+    idClient: 1,
+    idTest: 2,
+    testString: 'thisIsTest'
+  }
+}
+
+console.log(axios.getUri(fakeConfig)) */
