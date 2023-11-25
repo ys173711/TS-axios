@@ -1,15 +1,15 @@
 {
   "name": "--libraryname--",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "keywords": [],
-  "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
-  "typings": "dist/types/--libraryname--.d.ts",
+  "main": "dist/my-axios.umd.js",
+  "module": "dist/my-axios.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "author": "--username-- <--usermail-->",
+  "author": "ys <1737111795@qq.com>",
   "repository": {
     "type": "git",
     "url": ""
@@ -33,7 +33,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepub": "npm run test:prod && npm run build",
+    "pub": "sh release.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -56,7 +58,7 @@
       "ts",
       "tsx",
       "js"
-    ], 
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ],
@@ -72,7 +74,9 @@
       "src/*.{js,ts}"
     ],
     "setupFilesAfterEnv": [
-      ["<rootDir>/test/boot.ts"]
+      [
+        "<rootDir>/test/boot.ts"
+      ]
     ]
   },
   "prettier": {
@@ -87,6 +91,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
+    "@types/jasmine-ajax": "^3.3.5",
     "@types/jest": "^29.5.10",
     "@types/node": "^10.11.0",
     "@types/qs": "^6.9.10",
@@ -102,6 +107,8 @@
     "cz-conventional-changelog": "^2.1.0",
     "express": "^4.18.2",
     "husky": "^1.0.1",
+    "jasmine-ajax": "^4.0.0",
+    "jasmine-core": "^5.1.1",
     "jest": "^29.7.0",
     "jest-config": "^29.7.0",
     "lint-staged": "^8.0.0",
